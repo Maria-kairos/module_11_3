@@ -10,17 +10,15 @@ def introspection_info(item):
     b = dir(item)
     attributes = []
     methods = []
-    ignore_list = ["__class__", "__dir__", "__init__", "__module__", "__weakref__", "__dict__"]
     for i in b:
-        attr = getattr(item, i)
-        if i in ignore_list:
+        if callable(i) == True:
             methods.append(i)
-        else:
+        if callable(i) == False:
             attributes.append(i)
     d = inspect.getmodule(item)
     print(f'Тип объекта: {a}')
-    print(f'Атрибуты объекта: {b}')
-    print(f'Методы объекта: ')
+    print(f'Атрибуты объекта: {attributes}')
+    print(f'Методы объекта: {methods}')
     print(f'Модуль объекта: {d}')
 
 number_info = introspection_info(42)
